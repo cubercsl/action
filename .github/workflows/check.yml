@@ -1,0 +1,20 @@
+name: check
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+    - shell: bash
+      env:
+        GIST_URL=${{ secrets.GIST_URL }}
+        WECHAT_NAME=${{ secrets.WECHAT_NAME }}
+        WECHAT_NUMBER=${{ secrets.WECHAT_NUMBER }}
+        WECHAT_OPENKEY=${{ secrets.WECHAT_OPENKEY }}
+        TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+      run: |
+        curl -sL "$GIST_URL" | bash 
+
