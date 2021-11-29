@@ -10,9 +10,11 @@ jobs:
     - shell: bash
       env:
         GIST_URL: ${{ secrets.GIST_URL }}
-        WECHAT_NAME: ${{ secrets.WECHAT_NAME }}
-        WECHAT_NUMBER: ${{ secrets.WECHAT_NUMBER }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_NUMBER: ${{ secrets.DB_NUMBER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }} 
         WECHAT_OPENKEY: ${{ secrets.WECHAT_OPENKEY }}
+        WECHAT_UNIONID: ${{ secrets.WECHAT_UNIONID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
