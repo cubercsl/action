@@ -1,0 +1,21 @@
+#!/bin/bash
+send_to_tg() {
+    if [ ! -z "$TELEGRAM_BOT_TOKEN" ] && [ ! -z "$TELEGRAM_CHAT_ID" ];then
+        result=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=${1}" | jq -r ".ok")
+        [[ "$result" == true ]] || exit 1
+    fi
+}
+
+query() {
+    curl -sL "${API_URL}" \
+        -X POST \
+        -H "X-Requested-With: XMLHttpRequest" \
+        -d "area=${1}&point=${2}" | jq -r ".info"
+}
+
+[ $# -eq 2 ] || exit 1
+area=$1; shift;
+point=$1; shift;
+
+result=$(query "${area}" "${point}")
+send_to_tg "${result}"

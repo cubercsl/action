@@ -1,20 +1,20 @@
 name: check
 on:
   schedule:
-    - cron: 10 2 * * *
+    - cron: 10 14 * * *
   workflow_dispatch:
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - shell: bash
       env:
-        GIST_URL: ${{ secrets.GIST_URL }}
-        DB_NAME: ${{ secrets.DB_NAME }}
-        DB_NUMBER: ${{ secrets.DB_NUMBER }}
-        WECHAT_OPENKEY: ${{ secrets.WECHAT_OPENKEY }}
+        API_URL: ${{ secrets.API_URL }}
+        ARGS: ${{ secrets.args }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        curl -sL "$GIST_URL" | bash 
+        ./check $ARGS
+        
 
